@@ -1,33 +1,46 @@
-scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.stairWest, function (sprite, location) {
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.stairLadder, function (sprite, location) {
     info.changeScoreBy(1)
     NextLevel()
 })
-function NextLevel () {
-    tiles.placeOnRandomTile(mySprite, sprites.dungeon.collectibleBlueCrystal)
-    tiles.setTilemap(tilemap`level2`)
+function Level3 () {
+    tiles.setTilemap(tilemap`level3`)
+    tiles.placeOnRandomTile(mySprite, sprites.builtin.forestTiles0)
 }
-scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleRedCrystal, function (sprite, location) {
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleBlueCrystal, function (sprite, location) {
     info.changeScoreBy(1)
+    Level3()
+})
+function NextLevel () {
+    tiles.setTilemap(tilemap`level2`)
+    tiles.placeOnRandomTile(mySprite, sprites.dungeon.collectibleRedCrystal)
+}
+scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileGrass2, function (sprite, location) {
+    info.changeScoreBy(2)
     game.over(true)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    game.over(false)
 })
 let mySprite: Sprite = null
 mySprite = sprites.create(img`
-    e e e . . . . e e e . . . . 
-    c d d c . . c d d c . . . . 
-    c b d d f f d d b c . . . . 
-    c 3 b d d b d b 3 c . . . . 
-    f b 3 d d d d 3 b f . . . . 
-    e d d d d d d d d e . . . . 
-    e d f d d d d f d e . b f b 
-    f d d f d d f d d f . f d f 
-    f b d d b b d d 2 f . f d f 
-    . f 2 2 2 2 2 2 b b f f d f 
-    . f b d d d d d d b b d b f 
-    . f d d d d d b d d f f f . 
-    . f d f f f d f f d f . . . 
-    . f f . . f f . . f f . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . f f f f f f f f f . . . 
+    . . . . f 3 3 3 3 3 3 3 f . . . 
+    . . . . f 3 f 3 3 3 f 3 f . . . 
+    . . . . f 3 3 3 3 3 3 3 f . . . 
+    . . . . f 3 f f f f f 3 f . . . 
+    . . . . f 3 3 3 3 3 3 3 f . . . 
+    . . . . f f f f f f f f f . . . 
+    . . f f f f 3 3 3 3 3 3 f f f f 
+    . . f 3 3 f 3 3 3 3 3 3 f 3 3 f 
+    . . f f f f 3 3 3 3 3 3 f f f f 
+    . . . . . f f f f f f f f . . . 
+    . . . . . . 9 9 9 9 9 9 . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
     `, SpriteKind.Player)
 controller.moveSprite(mySprite, 100, 100)
 tiles.setTilemap(tilemap`level_1`)
-tiles.placeOnRandomTile(mySprite, sprites.dungeon.stairLadder)
+tiles.placeOnRandomTile(mySprite, sprites.dungeon.stairWest)
 scene.cameraFollowSprite(mySprite)
