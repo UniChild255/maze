@@ -14,6 +14,10 @@ function NextLevel () {
     tiles.setTilemap(tilemap`level2`)
     tiles.placeOnRandomTile(mySprite, sprites.dungeon.collectibleRedCrystal)
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
+    mySprite2.destroy()
+})
 scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileGrass2, function (sprite, location) {
     info.changeScoreBy(2)
     game.over(true)
@@ -21,6 +25,7 @@ scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileGrass2, function (spri
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     game.over(false)
 })
+let mySprite2: Sprite = null
 let mySprite: Sprite = null
 mySprite = sprites.create(img`
     . . . . . . . . . . . . . . . . 
@@ -44,3 +49,22 @@ controller.moveSprite(mySprite, 100, 100)
 tiles.setTilemap(tilemap`level_1`)
 tiles.placeOnRandomTile(mySprite, sprites.dungeon.stairWest)
 scene.cameraFollowSprite(mySprite)
+mySprite2 = sprites.create(img`
+    . . . . f f . . . f f . . . . . 
+    . . . . f f . . . f f . . . . . 
+    . . f f f f f f f f f f f . . . 
+    . . f 7 f f 7 7 7 f f 7 f . . . 
+    . . f 7 f f f f f f f f f f . . 
+    . . f 7 f f 7 7 7 f f 7 7 f . . 
+    . . f f f f f f f f f 7 7 f . . 
+    . . . . f f . . . f f 7 7 f . . 
+    . . . . f f . . . f f 7 7 f . . 
+    . . . . f f . . . f f 7 7 f . . 
+    . . . f f f f f f f f 7 7 f . . 
+    . . . f f f 7 7 7 f f 7 7 f . . 
+    . . . f f f 7 7 7 f f 7 7 f . . 
+    . . . f f f f f f f f f f f . . 
+    . . . . f f . . . f f . . . . . 
+    . . . . f f . . . f f . . . . . 
+    `, SpriteKind.Player)
+mySprite2.setPosition(64, 37)
