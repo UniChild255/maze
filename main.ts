@@ -27,6 +27,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 })
 let mySprite2: Sprite = null
 let mySprite: Sprite = null
+game.splash("Welcome to THE ROBO-MAZE")
+game.splash("You're a robot and you have to beat this maze before the timer ends, can you do it?")
+info.startCountdown(90)
 mySprite = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
